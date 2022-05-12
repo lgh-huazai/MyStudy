@@ -1,6 +1,6 @@
 ## 1、获取相关的IP地址
 
-打开https://ipaddress.com，查询以下两个网址对应的IP地址：
+访问`https://ipaddress.com`，查询以下两个网址对应的IP地址：
 
 ```
 github.com
