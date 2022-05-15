@@ -33,3 +33,13 @@ ssh-keygen -t rsa -C "email@email.com"
 ## 使用
 
 SSH Key可用于GitHub或者GitLab等代码托管平台clone代码的时候使用SSH方式clone，这样就不用先https那种方式要输入密码了。
+
+## 其他
+
+如果本机的Git还没有设置用户名和邮箱，则可以使用以下指令：
+
+```
+git config --global user.name "huazai"
+git config --global user.email "1297933709@qq.com"
+```
+
