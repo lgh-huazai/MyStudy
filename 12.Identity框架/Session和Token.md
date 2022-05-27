@@ -1,4 +1,4 @@
-## Session
+## 1、Session
 
 以前的网站，由于http协议是无状态的，是怎么知道这次请求是谁呢？
 
@@ -33,7 +33,7 @@
 
 2、有的客户端保存cookie不太方便（app，小程序）
 
-## JWT（Json Web Token）
+## 2、JWT（Json Web Token）
 
 JWT把登录信息保存在客户端。
 
@@ -49,11 +49,11 @@ token有三部分组成：
 
 3、签名signature（签名算法：header + payload + 服务器才知道的秘钥）
 
-服务器拿到token后，先用秘钥+token里的header+token里的payload经过签名算法生成一个签名，
+服务器拿到token后，先用秘钥 + token里的header + token里的payload经过签名算法生成一个签名，
 
 然后再跟客户端传过来的签名进行比对，若错误则报错，若一致则使用token里面的用户信息。
 
-优点：
+JWT优点：
 
 1、状态保存在客户端，天然适合分布式系统
 
@@ -70,3 +70,176 @@ System.IdentityModel.Tokens.JWT
 ```
 
 ![](..\99.截图\18.png)
+
+1、生成token的代码：
+
+```c#
+var claims = new List<Claim>(); //一个Chaim代表payload里面的一项信息
+claims.Add(new Claim(ClaimTypes.NameIdentifier, "1"));
+claims.Add(new Claim(ClaimTypes.Name, "huazai"));
+claims.Add(new Claim(ClaimTypes.Role, "User"));
+claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+claims.Add(new Claim("PassPort", "E90000082"));
+string key = "fasdfad&9045dafz222#fadpio@0232"; //仅服务器端知道的秘钥
+DateTime expires = DateTime.Now.AddDays(1); //token的过期时间
+byte[] secBytes = Encoding.UTF8.GetBytes(key);
+var secKey = new SymmetricSecurityKey(secBytes);
+var credentials = new SigningCredentials(secKey,SecurityAlgorithms.HmacSha256Signature);
+var tokenDescriptor = new JwtSecurityToken(claims: claims,
+    expires: expires, signingCredentials: credentials);
+string jwt = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+Console.WriteLine(jwt);
+```
+
+2、解析客户端传过来的token
+
+```c#
+string jwt = Console.ReadLine()!;
+string[] segments = jwt.Split('.');
+string head = JwtDecode(segments[0]);
+string payload = JwtDecode(segments[1]);
+Console.WriteLine("--------head--------");
+Console.WriteLine(head);
+Console.WriteLine("--------payload--------");
+Console.WriteLine(payload);
+string JwtDecode(string s)
+{
+	s = s.Replace('-', '+').Replace('_', '/');
+	switch (s.Length % 4)
+	{
+		case 2:
+			s += "==";
+			break;
+		case 3:
+			s += "=";
+			break;
+	}
+	var bytes = Convert.FromBase64String(s);
+	return Encoding.UTF8.GetString(bytes);
+}
+```
+
+注意：
+
+1、负载中的信息是明文保存的；
+
+2、不要把不能被客户端知道的信息保存在token当中；
+
+## 如何对签名进行校验
+
+一般客户端传过来的token都具有被篡改过的可能，所以==服务器端需要对token进行校验==。
+
+可以使用代码进行校验，后面也可以把校验的工作嵌入到swagger中。
+
+代码校验：
+
+```c#
+string jwt = Console.ReadLine()!;
+string secKey = "fasdfad&9045dafz222#fadpio@0232"; //仅服务器端知道的秘钥
+JwtSecurityTokenHandler tokenHandler = new();
+TokenValidationParameters valParam = new();
+var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secKey));
+valParam.IssuerSigningKey = securityKey;
+valParam.ValidateIssuer = false;
+valParam.ValidateAudience = false;
+// 若token被篡改过，则会在ValidateToken方法发生异常
+ClaimsPrincipal claimsPrincipal = tokenHandler.ValidateToken(jwt,
+		valParam, out SecurityToken secToken);
+foreach (var claim in claimsPrincipal.Claims)
+{
+	Console.WriteLine($"{claim.Type}={claim.Value}");
+}
+```
+
+## ASP.NET Core对JWT的校验封装
+
+上面讲到的都是JWT的原理，其实到真正项目中，ASP.NET Core有对JWT进行封装，并不需要自己动手写。
+
+**以下组件主要是对JWT进行校验**。
+
+1、配置文件里面配置JWT节点
+
+主要是秘钥（SigninKey）和过期时间（ExpireSeconds）两个值。
+
+2、安装nuget包
+
+```shell
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+```
+
+![](..\99.截图\22.png)
+
+```c#
+services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(x =>
+{
+	var jwtOpt = builder.Configuration.GetSection("JWT").Get<JWTOptions>();
+	byte[] keyBytes = Encoding.UTF8.GetBytes(jwtOpt.SigningKey);
+	var secKey = new SymmetricSecurityKey(keyBytes);
+	x.TokenValidationParameters = new()
+	{
+		ValidateIssuer = false,
+		ValidateAudience = false,
+		ValidateLifetime = true, //进行token是否过期校验
+		ValidateIssuerSigningKey = true, //进行签名校验
+		IssuerSigningKey = secKey
+	};
+});
+```
+
+3、在app.UseAuthorizaton()之前添加app.UseAuthentication()
+
+4、编写login的代码，把生成的token返回给客户端
+
+5、在控制器或者action中加入attritube：**[Authorize]**
+
+代表此控制器或者action需要登录才能访问这个接口。
+
+对于被标记了Authorized的控制器的某个操作方法不想被验证，可以加上**[AllowAnonymous]**
+
+6、需需要在请求报文头（header）加上key-value
+
+key：**Authorization** value：**Bearer token**（token需要填实际要传的token）
+
+加上后才能正确的访问带有Authorized attritube的控制器或者方法。
+
+7、如何获取token里面的payload信息呢？
+
+```c#
+string id = this.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+string userName = this.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+IEnumerable<Claim> roleClaims = this.User.FindAll(ClaimTypes.Role);
+```
+
+8、JWT在app，小程序保存在哪里？
+
+存到全局变量或者文件里面。
+
+## Swagger集成JWT
+
+上面的代码中，每个请求都要把JWT塞到header里面才能请求成功，在postman里面去塞header。
+
+那如何在swagger中就可以塞token到header了呢？
+
+```c#
+builder.Services.AddSwaggerGen(c =>
+{
+    var scheme = new OpenApiSecurityScheme()
+    {
+        Description = "Authorization header. \r\nExample: 'Bearer 12345abcdef'",
+        Reference = new OpenApiReference{Type = ReferenceType.SecurityScheme,
+            Id = "Authorization"},
+        Scheme = "oauth2",Name = "Authorization",
+        In = ParameterLocation.Header,Type = SecuritySchemeType.ApiKey,
+    };
+    c.AddSecurityDefinition("Authorization", scheme);
+    var requirement = new OpenApiSecurityRequirement();
+    requirement[scheme] = new List<string>();
+    c.AddSecurityRequirement(requirement);
+}); 
+```
+
+效果：
+
+![](..\99.截图\23.png)
