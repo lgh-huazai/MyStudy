@@ -1,0 +1,56 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = BlazorComponentLifeCycle
+build_property.RootNamespace = BlazorComponentLifeCycle
+build_property.ProjectDir = D:\2.Project\BlazorComponentLifeCycle\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\2.Project\BlazorComponentLifeCycle
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/2.Project/BlazorComponentLifeCycle/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/A.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/B.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/C.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/D.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90Rm91bmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/Main.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-eyz820qutn
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/2.Project/BlazorComponentLifeCycle/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
