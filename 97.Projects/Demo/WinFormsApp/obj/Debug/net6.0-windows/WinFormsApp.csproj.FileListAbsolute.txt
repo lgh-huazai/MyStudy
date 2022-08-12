@@ -1,0 +1,17 @@
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\bin\Debug\net6.0-windows\WinFormsApp.exe
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\bin\Debug\net6.0-windows\WinFormsApp.deps.json
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\bin\Debug\net6.0-windows\WinFormsApp.runtimeconfig.json
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\bin\Debug\net6.0-windows\WinFormsApp.dll
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\bin\Debug\net6.0-windows\WinFormsApp.pdb
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.csproj.AssemblyReference.cache
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.Form1.resources
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.csproj.GenerateResource.cache
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.AssemblyInfoInputs.cache
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.AssemblyInfo.cs
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.csproj.CoreCompileInputs.cache
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.dll
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\refint\WinFormsApp.dll
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.pdb
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\WinFormsApp.genruntimeconfig.cache
+C:\Users\hua\Desktop\MyStudy\97.Projects\Demo\WinFormsApp\obj\Debug\net6.0-windows\ref\WinFormsApp.dll
