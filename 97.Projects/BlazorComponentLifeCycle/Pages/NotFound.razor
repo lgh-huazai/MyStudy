@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+
+<Result Status="404"
+        Title="404"
+        SubTitle="Sorry, the page you visited does not exist.">
+        <Extra>
+            <Button Type="primary" OnClick="ClickEvent">Back Home</Button>
+        </Extra>
+</Result>
+
+@code
+{
+    RenderFragment extra =@<Button Type="primary">Back Home</Button>;
+}
