@@ -73,7 +73,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 - 将index.html添加到项目wwwroot中，并设置为嵌入资源
 
-![](..\99.截图\13.png)
+![](..\99.截图\14.png)
 
 **5、获取Miniprofiler的HTML片段**
 
@@ -101,4 +101,5 @@ public IActionResult SetupMiniProfiler()
 
 **6、运行效果**
 
-![](..\99.截图\14.png)
+![](..\99.截图\13.png)
+
