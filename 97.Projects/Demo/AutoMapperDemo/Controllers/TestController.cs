@@ -1,32 +1,32 @@
+using System.Net;
 using AutoMapper;
 using AutoMapperDemo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Net;
 
 namespace AutoMapperDemo.Controllers
 {
     [ApiController]
     public class TestController : ControllerBase
     {
-        public TestController() {}
+        public TestController() { }
 
         [HttpPost]
         [Route("TestAutoMapper")]
-        [SwaggerResponse((int)HttpStatusCode.OK, "Response Model", typeof(UIModel))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Test OK", typeof(UIModel))]
         public IActionResult TestAutoMapper([FromBody] ORModel ormData)
         {
-            // 1.Ó³Éä¹æÔòÅäÖÃ
+            // 1.æ˜ å°„è§„åˆ™é…ç½®
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ORModel, UIModel>()
-                    .ForMember(ui => ui.Gender, opt => opt.MapFrom(orm => orm.Gender == 1 ? "ÄĞ" : "Å®"))
+                    .ForMember(ui => ui.Gender, opt => opt.MapFrom(orm => orm.Gender == 1 ? "ç”·" : "å¥³"))
                     .ForMember(ui => ui.StudentName, opt => opt.MapFrom(orm => orm.Name))
-                    .ForMember(ui => ui.BirthDay, opt => opt.MapFrom(orm => orm.BirthDay.ToString("yyyy-MM-dd HH:mm:ss"))); 
+                    .ForMember(ui => ui.BirthDay, opt => opt.MapFrom(orm => orm.BirthDay.ToString("yyyy-MM-dd HH:mm:ss")));
             });
-            // 2.´´½¨Ó³ÉäµÄÊµÀı
+            // 2.åˆ›å»ºæ˜ å°„çš„å®ä¾‹
             var mapper = mapperConfig.CreateMapper();
-            // 3.Êı¾İÓ³Éä
+            // 3.æ•°æ®æ˜ å°„
             var uiData = mapper.Map<UIModel>(ormData);
             return Ok(uiData);
         }
