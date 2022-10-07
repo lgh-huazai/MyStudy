@@ -69,7 +69,7 @@ JWT优点：
 System.IdentityModel.Tokens.JWT
 ```
 
-![](..\99.截图\18.png)
+![](..\99.Images\18.png)
 
 1、生成token的代码：
 
@@ -167,7 +167,7 @@ foreach (var claim in claimsPrincipal.Claims)
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 ```
 
-![](..\99.截图\22.png)
+![](..\99.Images\22.png)
 
 ```c#
 services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
@@ -242,4 +242,4 @@ builder.Services.AddSwaggerGen(c =>
 
 效果：
 
-![](..\99.截图\23.png)
+![](..\99.Images\23.png)
